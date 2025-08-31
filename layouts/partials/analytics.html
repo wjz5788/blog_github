@@ -1,0 +1,46 @@
+<!-- Google Analytics -->
+{{ if .Site.Params.googleAnalytics }}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.googleAnalytics }}');
+</script>
+{{ end }}
+
+<!-- 百度统计 -->
+{{ if .Site.Params.baiduAnalytics }}
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?{{ .Site.Params.baiduAnalytics }}";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+{{ end }}
+
+<!-- 页面浏览量统计 -->
+<script>
+// 简单的页面浏览量统计
+function incrementPageViews() {
+  const pageKey = window.location.pathname;
+  const views = localStorage.getItem(`pageViews_${pageKey}`) || 0;
+  const newViews = parseInt(views) + 1;
+  localStorage.setItem(`pageViews_${pageKey}`, newViews);
+  
+  // 显示浏览量
+  const viewElement = document.getElementById('pageViews');
+  if (viewElement) {
+    viewElement.textContent = newViews;
+  }
+}
+
+// 页面加载时增加浏览量
+document.addEventListener('DOMContentLoaded', function() {
+  incrementPageViews();
+});
+</script>

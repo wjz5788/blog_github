@@ -3,7 +3,8 @@ title = "我的视频文字博客"
 theme = "PaperMod"
 defaultContentLanguage = "zh"
 languageCode = "zh-cn"
-paginate = 10
+[pagination]
+  pagerSize = 10
 
 # 生成的静态文件里带 CNAME (GitHub Pages 需要)
 publishDir = "public"
@@ -31,6 +32,27 @@ enableGitInfo = true
 
   # 搜索支持
   ShowSearch = true
+
+  # 评论功能
+  comments = true
+
+  # 评论系统配置 (Valine)
+  [params.valine]
+    appId = "YOUR_APPID"  # 替换为你的 LeanCloud App ID
+    appKey = "YOUR_APPKEY"  # 替换为你的 LeanCloud App Key
+
+  # Google Analytics
+  googleAnalytics = "G-XXXXXXXXXX"  # 替换为你的 GA4 跟踪 ID
+
+  # 百度统计
+  baiduAnalytics = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"  # 替换为你的百度统计代码
+
+  # Google AdSense
+  [params.adsense]
+    enabled = false  # 设置为 true 启用广告
+    client = "ca-pub-XXXXXXXXXXXX"  # 替换为你的 AdSense 发布商 ID
+    slot = "YYYYYYYYYY"  # 替换为你的广告位 ID
+    position = "article-bottom"  # article-top, article-bottom, sidebar
 
 [menu]
   [[menu.main]]
@@ -61,3 +83,7 @@ enableGitInfo = true
 
   [markup.highlight]
     noClasses = false
+
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
