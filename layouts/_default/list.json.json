@@ -1,12 +1,12 @@
 [
-{{- range .Pages -}}
-{
-  "title": {{ .Title | jsonify }},
-  "url": {{ .RelPermalink | jsonify }},
-  "content": {{ .Plain | jsonify }},
-  "summary": {{ .Summary | jsonify }},
-  "date": {{ .Date.Format "2006-01-02" | jsonify }},
-  "tags": {{ .Params.tags | jsonify }}
-}{{ if not (last .) }},{{ end }}
-{{- end -}}
-]
+  {{- $pages := .Pages -}}
+  {{- range $index, $page := $pages }}
+    {
+      "title": {{ $page.Title | jsonify }},
+      "url": {{ $page.RelPermalink | jsonify }},
+      "date": {{ $page.Date.Format "2006-01-02" | jsonify }},
+      "tags": {{ $page.Params.tags | jsonify }}
+    }{{ if ne (add $index 1) (len $pages) }},{{ end }}
+  {{- end }}
+  ]
+  
