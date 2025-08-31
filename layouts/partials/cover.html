@@ -1,0 +1,20 @@
+<!-- 封面图片 -->
+{{ if .Params.cover }}
+    <div class="post-cover">
+        <img src="{{ .Params.cover }}" alt="{{ .Title }}" />
+    </div>
+{{ end }}
+
+<style>
+.post-cover {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.post-cover img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+</style>

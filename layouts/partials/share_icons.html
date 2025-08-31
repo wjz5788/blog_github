@@ -1,0 +1,43 @@
+<!-- 分享图标 -->
+<div class="share-icons">
+    <h4>分享到:</h4>
+    <a href="https://twitter.com/intent/tweet?text={{ .Title }}&url={{ .Permalink }}" target="_blank" rel="noopener">
+        Twitter
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener">
+        Facebook
+    </a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" rel="noopener">
+        LinkedIn
+    </a>
+</div>
+
+<style>
+.share-icons {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.share-icons h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.share-icons a {
+    display: inline-block;
+    margin-right: 15px;
+    color: #007acc;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #007acc;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.share-icons a:hover {
+    background: #007acc;
+    color: white;
+}
+</style>

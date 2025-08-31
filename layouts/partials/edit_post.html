@@ -1,0 +1,6 @@
+<!-- 编辑文章链接 -->
+{{ if .Site.Params.editPost }}
+    <a href="{{ .Site.Params.editPost }}{{ .File.Path }}" target="_blank" rel="noopener">
+        编辑此文章
+    </a>
+{{ end }}

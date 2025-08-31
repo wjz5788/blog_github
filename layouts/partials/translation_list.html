@@ -1,0 +1,11 @@
+<!-- 翻译列表 -->
+{{ if .IsTranslated }}
+    <div class="translations">
+        <h4>其他语言版本:</h4>
+        <ul>
+            {{ range .Translations }}
+                <li><a href="{{ .RelPermalink }}">{{ .Language.LanguageName }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+{{ end }}

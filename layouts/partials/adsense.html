@@ -1,101 +1,24 @@
-<!-- Google AdSense 广告 -->
-{{ if .Site.Params.adsense.enabled }}
-<div class="adsense-container">
-  {{ if eq .Site.Params.adsense.position "article-top" }}
-    <!-- 文章顶部广告 -->
-    <div class="adsense ad-article-top">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="{{ .Site.Params.adsense.client }}"
-           data-ad-slot="{{ .Site.Params.adsense.slot }}"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+<!-- 广告位 -->
+{{ if .Params.adsense.enabled }}
+    <div class="adsense">
+        <!-- 广告代码将在这里显示 -->
+        <div class="ad-placeholder">
+            广告位
+        </div>
     </div>
-  {{ end }}
-  
-  {{ if eq .Site.Params.adsense.position "article-bottom" }}
-    <!-- 文章底部广告 -->
-    <div class="adsense ad-article-bottom">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="{{ .Site.Params.adsense.client }}"
-           data-ad-slot="{{ .Site.Params.adsense.slot }}"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-  {{ end }}
-  
-  {{ if eq .Site.Params.adsense.position "sidebar" }}
-    <!-- 侧边栏广告 -->
-    <div class="adsense ad-sidebar">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="{{ .Site.Params.adsense.client }}"
-           data-ad-slot="{{ .Site.Params.adsense.slot }}"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-  {{ end }}
-</div>
+{{ end }}
 
 <style>
-.adsense-container {
-  margin: 20px 0;
-  text-align: center;
-}
-
 .adsense {
-  margin: 20px 0;
-  padding: 10px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
+    margin: 20px 0;
+    text-align: center;
 }
 
-.ad-article-top {
-  margin-bottom: 30px;
-}
-
-.ad-article-bottom {
-  margin-top: 30px;
-}
-
-.ad-sidebar {
-  margin: 15px 0;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .adsense {
-    margin: 15px 0;
-    padding: 5px;
-  }
-}
-
-/* 广告加载时的占位符 */
-.adsense::before {
-  content: "广告加载中...";
-  display: block;
-  color: #999;
-  font-size: 12px;
-  margin-bottom: 5px;
-}
-
-/* 隐藏广告加载提示 */
-.adsense ins {
-  display: block;
+.ad-placeholder {
+    background: #f0f0f0;
+    border: 2px dashed #ccc;
+    padding: 40px;
+    color: #666;
+    font-style: italic;
 }
 </style>
-{{ end }}

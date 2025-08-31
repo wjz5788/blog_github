@@ -68,10 +68,8 @@
     {{- end }}
   </footer>
 
-  <!-- 评论系统 -->
-  {{- if (.Param "comments") }}
-  {{- partial "comments.html" . }}
-  {{- end }}
+  <!-- 评论系统 - 已禁用 -->
+  {{- /* 评论功能已关闭 */ -}}
 </article>
 
 {{- end }}{{/* end main */}}

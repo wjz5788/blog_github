@@ -1,6 +1,6 @@
 baseURL = "https://wjz5788.com/"
 title = "我的视频文字博客"
-theme = "PaperMod"
+theme = "ananke"
 defaultContentLanguage = "zh"
 languageCode = "zh-cn"
 [pagination]
@@ -34,12 +34,12 @@ enableGitInfo = true
   ShowSearch = true
 
   # 评论功能
-  comments = true
+  comments = false
 
-  # 评论系统配置 (Valine)
+  # 评论系统配置 (Valine) - 已禁用
   [params.valine]
-    appId = "YOUR_APPID"  # 替换为你的 LeanCloud App ID
-    appKey = "YOUR_APPKEY"  # 替换为你的 LeanCloud App Key
+    appId = ""  # 评论功能已禁用
+    appKey = ""  # 评论功能已禁用
 
   # Google Analytics
   googleAnalytics = "G-XXXXXXXXXX"  # 替换为你的 GA4 跟踪 ID

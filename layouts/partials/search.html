@@ -1,202 +1,84 @@
 <!-- 搜索功能 -->
 <div class="search-container">
-  <div class="search-box-wrapper">
-    <input type="text" id="searchBox" placeholder="搜索文章..." class="search-input">
-    <div class="search-icon">🔍</div>
-  </div>
-  <div id="searchResults" class="search-results"></div>
+    <input type="text" id="search-input" placeholder="搜索文章..." />
+    <div id="search-results"></div>
 </div>
 
 <style>
 .search-container {
-  margin: 20px 0;
-  position: relative;
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
 }
 
-.search-box-wrapper {
-  position: relative;
-  max-width: 400px;
-  margin: 0 auto;
+#search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.search-input {
-  width: 100%;
-  padding: 12px 40px 12px 15px;
-  border: 2px solid #ddd;
-  border-radius: 25px;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
+#search-results {
+    margin-top: 10px;
 }
 
-.search-input:focus {
-  border-color: #007acc;
+.search-result {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
 }
 
-.search-icon {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #666;
-  pointer-events: none;
+.search-result a {
+    color: #007acc;
+    text-decoration: none;
 }
 
-.search-results {
-  margin-top: 10px;
-  max-height: 400px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: white;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  display: none;
-}
-
-.search-result-item {
-  padding: 15px;
-  border-bottom: 1px solid #eee;
-  transition: background-color 0.2s ease;
-}
-
-.search-result-item:hover {
-  background-color: #f8f9fa;
-}
-
-.search-result-item:last-child {
-  border-bottom: none;
-}
-
-.search-result-title {
-  font-weight: bold;
-  color: #007acc;
-  margin-bottom: 5px;
-}
-
-.search-result-summary {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.search-result-date {
-  color: #999;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.no-results {
-  padding: 20px;
-  text-align: center;
-  color: #666;
+.search-result a:hover {
+    text-decoration: underline;
 }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/lunr/lunr.min.js"></script>
 <script>
-// 搜索功能实现
-let pagesIndex = null;
-let pagesData = null;
-
-// 初始化搜索索引
-async function initSearch() {
-  try {
-    const response = await fetch('/index.json');
-    const pages = await response.json();
-    
-    pagesData = pages;
-    pagesIndex = lunr(function() {
-      this.ref('url');
-      this.field('title', { boost: 10 });
-      this.field('content', { boost: 5 });
-      this.field('summary', { boost: 3 });
-      this.field('tags', { boost: 2 });
-      
-      pages.forEach(page => {
-        this.add(page);
-      });
-    });
-  } catch (error) {
-    console.error('搜索索引加载失败:', error);
-  }
-}
-
-// 执行搜索
-function performSearch(query) {
-  if (!pagesIndex || !query.trim()) {
-    return [];
-  }
-  
-  try {
-    const results = pagesIndex.search(query);
-    return results.map(result => {
-      const page = pagesData.find(p => p.url === result.ref);
-      return {
-        ...page,
-        score: result.score
-      };
-    });
-  } catch (error) {
-    console.error('搜索执行失败:', error);
-    return [];
-  }
-}
-
-// 显示搜索结果
-function displayResults(results) {
-  const resultsDiv = document.getElementById('searchResults');
-  
-  if (results.length === 0) {
-    resultsDiv.innerHTML = '<div class="no-results">没有找到相关文章</div>';
-  } else {
-    resultsDiv.innerHTML = results.map(result => `
-      <div class="search-result-item">
-        <div class="search-result-title">
-          <a href="${result.url}">${result.title}</a>
-        </div>
-        <div class="search-result-summary">${result.summary || ''}</div>
-        <div class="search-result-date">${result.date || ''}</div>
-      </div>
-    `).join('');
-  }
-  
-  resultsDiv.style.display = 'block';
-}
-
-// 隐藏搜索结果
-function hideResults() {
-  const resultsDiv = document.getElementById('searchResults');
-  resultsDiv.style.display = 'none';
-}
-
-// 事件监听
 document.addEventListener('DOMContentLoaded', function() {
-  initSearch();
-  
-  const searchBox = document.getElementById('searchBox');
-  let searchTimeout;
-  
-  searchBox.addEventListener('input', function() {
-    clearTimeout(searchTimeout);
-    const query = this.value.trim();
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
     
-    if (query.length === 0) {
-      hideResults();
-      return;
-    }
+    searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        if (query.length < 2) {
+            searchResults.innerHTML = '';
+            return;
+        }
+        
+        // 简单的搜索实现
+        const articles = document.querySelectorAll('article');
+        let results = [];
+        
+        articles.forEach(article => {
+            const title = article.querySelector('h2')?.textContent || '';
+            const content = article.textContent || '';
+            
+            if (title.toLowerCase().includes(query) || content.toLowerCase().includes(query)) {
+                const link = article.querySelector('a')?.href || '';
+                results.push({ title, link });
+            }
+        });
+        
+        displayResults(results);
+    });
     
-    // 防抖处理
-    searchTimeout = setTimeout(() => {
-      const results = performSearch(query);
-      displayResults(results);
-    }, 300);
-  });
-  
-  // 点击外部隐藏搜索结果
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.search-container')) {
-      hideResults();
+    function displayResults(results) {
+        if (results.length === 0) {
+            searchResults.innerHTML = '<p>没有找到相关文章</p>';
+            return;
+        }
+        
+        const html = results.map(result => 
+            `<div class="search-result"><a href="${result.link}">${result.title}</a></div>`
+        ).join('');
+        
+        searchResults.innerHTML = html;
     }
-  });
 });
 </script>

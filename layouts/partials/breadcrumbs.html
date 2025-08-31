@@ -1,0 +1,42 @@
+<!-- 面包屑导航 -->
+<nav class="breadcrumbs">
+    <a href="/">首页</a>
+    {{ if .IsPage }}
+        {{ if .Section }}
+            <span class="separator">/</span>
+            <a href="/{{ .Section }}/">{{ .Section | title }}</a>
+        {{ end }}
+        <span class="separator">/</span>
+        <span class="current">{{ .Title }}</span>
+    {{ else if .IsSection }}
+        <span class="separator">/</span>
+        <span class="current">{{ .Title }}</span>
+    {{ end }}
+</nav>
+
+<style>
+.breadcrumbs {
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.breadcrumbs a {
+    color: #007acc;
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs .separator {
+    margin: 0 8px;
+    color: #999;
+}
+
+.breadcrumbs .current {
+    color: #333;
+    font-weight: bold;
+}
+</style>
