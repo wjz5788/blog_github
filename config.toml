@@ -1,16 +1,63 @@
 baseURL = "https://wjz5788.com/"
 title = "我的视频文字博客"
-languageCode = "zh-CN"
 theme = "PaperMod"
+defaultContentLanguage = "zh"
+languageCode = "zh-cn"
+paginate = 10
+
+# 生成的静态文件里带 CNAME (GitHub Pages 需要)
+publishDir = "public"
+
+# 让 Hugo 自动生成 robots.txt 和 sitemap
+enableRobotsTXT = true
+enableEmoji = true
+enableGitInfo = true
 
 [params]
-  description = "500小时视频文字内容博客"
-  author = "Zhaomosheng"
-  keywords = ["视频文字", "教程", "博客"]
+  env = "production"
+  title = "我的视频文字博客"
+  description = "视频转文字的知识库，持续更新"
+  keywords = ["博客", "视频转文字", "知识库", "wjz5788"]
+  author = "wjz5788"
+  DateFormat = "2006-01-02"
+  defaultTheme = "auto"  # auto, dark, light
+
+  # 首页显示
   ShowReadingTime = true
   ShowShareButtons = true
-  mainSections = ["posts"]
-  highlightStyle = "monokai"
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+
+  # 搜索支持
+  ShowSearch = true
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "首页"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 3
 
 [outputs]
-  home = ["HTML", "RSS", "JSON", "SITEMAP"]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+  [markup.highlight]
+    noClasses = false
