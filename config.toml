@@ -1,0 +1,16 @@
+baseURL = "https://wjz5788.com/"
+title = "我的视频文字博客"
+languageCode = "zh-CN"
+theme = "PaperMod"
+
+[params]
+  description = "500小时视频文字内容博客"
+  author = "Zhaomosheng"
+  keywords = ["视频文字", "教程", "博客"]
+  ShowReadingTime = true
+  ShowShareButtons = true
+  mainSections = ["posts"]
+  highlightStyle = "monokai"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "SITEMAP"]
